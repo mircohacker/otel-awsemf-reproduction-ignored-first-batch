@@ -1,0 +1,16 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+exporters:
+  awsemf:
+    resource_to_telemetry_conversion:
+      enabled: true
+    log_group_name: "emfbug-reproduction-embedded-metrics-otel"
+    log_stream_name: "otel-stream"
+    namespace: "your-metric-namespace"
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      exporters: [awsemf]
